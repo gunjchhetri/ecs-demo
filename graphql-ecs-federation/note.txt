@@ -1,0 +1,7 @@
+getting this error in task - "ResourceInitializationError: unable to pull secrets or registry auth: execution resource retrieval failed: unable to retrieve ecr registry auth: service call has been retried 3 time(s): RequestError: send request failed caused by: Post \"https://api.ecr.ap-south-1.amazonaws.com/\": dial tcp 52.95.85.0:443: i/o timeout. Please check your task network configuration
+
+
+
+
+to get task status -
+aws ecs describe-tasks --cluster DemoCluster --tasks 8fabaebd33d64d9d95c4bd9f45371af3

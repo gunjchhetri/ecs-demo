@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # gateway:
+  #   build:
+  #     context: ./gateway
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     - graphql_network
+
+  bookservice:
+    build: ./service-books
+    ports:
+      - "8080:8080"
+    hostname: books.app.server
+    networks:
+      - graphql_network
+
+  authorservice:
+    build: ./service-author
+    ports:
+      - "8000:8000"
+    hostname: authors.app.server
+    networks:
+      - graphql_network
+     
+
+networks:
+  graphql_network:
+    driver: bridge

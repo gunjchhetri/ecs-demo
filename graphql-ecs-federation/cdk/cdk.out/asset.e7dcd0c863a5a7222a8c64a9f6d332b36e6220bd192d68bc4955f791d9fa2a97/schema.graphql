@@ -1,0 +1,98 @@
+schema
+  @link(url: "https://specs.apollo.dev/link/v1.0")
+  @link(url: "https://specs.apollo.dev/join/v0.3", for: EXECUTION)
+{
+  query: Query
+  mutation: Mutation
+}
+
+directive @join__enumValue(graph: join__Graph!) repeatable on ENUM_VALUE
+
+directive @join__field(graph: join__Graph, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @join__graph(name: String!, url: String!) on ENUM_VALUE
+
+directive @join__implements(graph: join__Graph!, interface: String!) repeatable on OBJECT | INTERFACE
+
+directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boolean! = false, resolvable: Boolean! = true, isInterfaceObject: Boolean! = false) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
+
+directive @join__unionMember(graph: join__Graph!, member: String!) repeatable on UNION
+
+directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
+
+type Author
+  @join__type(graph: AUTHORS, key: "id")
+  @join__type(graph: BOOKS, key: "id")
+{
+  id: Int!
+  name: String! @join__field(graph: AUTHORS)
+  age: Int! @join__field(graph: AUTHORS)
+  books: [Book] @join__field(graph: BOOKS)
+}
+
+input AuthorInput
+  @join__type(graph: AUTHORS)
+{
+  name: String!
+  age: Int!
+}
+
+type Book
+  @join__type(graph: BOOKS, key: "id")
+{
+  id: Int!
+  title: String!
+  publication: String!
+  description: String!
+  author: Author
+}
+
+input BookInput
+  @join__type(graph: BOOKS)
+{
+  title: String!
+  publication: String!
+  description: String!
+  authorId: Int!
+}
+
+scalar join__FieldSet
+
+enum join__Graph {
+  AUTHORS @join__graph(name: "authors", url: "http://authors.app.server")
+  BOOKS @join__graph(name: "books", url: "http://books:8080")
+}
+
+scalar link__Import
+
+enum link__Purpose {
+  """
+  `SECURITY` features provide metadata necessary to securely resolve fields.
+  """
+  SECURITY
+
+  """
+  `EXECUTION` features provide metadata necessary for operation execution.
+  """
+  EXECUTION
+}
+
+type Mutation
+  @join__type(graph: AUTHORS)
+  @join__type(graph: BOOKS)
+{
+  addAuthor(author: AuthorInput!): Author @join__field(graph: AUTHORS)
+  addBook(book: BookInput!): Book @join__field(graph: BOOKS)
+  deleteBook(id: Int!): Boolean @join__field(graph: BOOKS)
+}
+
+type Query
+  @join__type(graph: AUTHORS)
+  @join__type(graph: BOOKS)
+{
+  authorById(id: Int!): Author @join__field(graph: AUTHORS)
+  allAuthors: [Author] @join__field(graph: AUTHORS)
+  bookById(id: Int!): Book @join__field(graph: BOOKS)
+  booksByAuthor(authorId: Int!): [Book] @join__field(graph: BOOKS)
+  allBooks: [Book] @join__field(graph: BOOKS)
+}

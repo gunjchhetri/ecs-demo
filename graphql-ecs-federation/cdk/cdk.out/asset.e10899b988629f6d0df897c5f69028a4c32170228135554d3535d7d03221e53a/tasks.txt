@@ -1,0 +1,5 @@
+1. Create simple apollo graphql app withe Book and Author entities -> SHould cover the basic of graphql like fetching author when Book is fetched
+2. Move the apis to Book and Author Services and use federated apollo gateway.
+3. Deploy the services to ecs.
+4. Make Book and Author as private and the services should be accessible only from federated gateway.
+5. Creat the same apis with Appsync using private and merged-api

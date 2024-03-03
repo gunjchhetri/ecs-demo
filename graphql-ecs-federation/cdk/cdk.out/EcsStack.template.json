@@ -1,0 +1,1348 @@
+{
+ "Resources": {
+  "DemoVpc1AD7511C": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EcsStack/DemoVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/Resource"
+   }
+  },
+  "DemoVpcPublicSubnet1Subnet7B8BDBCD": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    },
+    "AvailabilityZone": "ap-south-1a",
+    "CidrBlock": "10.0.0.0/17",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "EcsStack/DemoVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/PublicSubnet1/Subnet"
+   }
+  },
+  "DemoVpcPublicSubnet1RouteTable793CEE44": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EcsStack/DemoVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "DemoVpcPublicSubnet1RouteTableAssociation1C4D66E6": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "DemoVpcPublicSubnet1RouteTable793CEE44"
+    },
+    "SubnetId": {
+     "Ref": "DemoVpcPublicSubnet1Subnet7B8BDBCD"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "DemoVpcPublicSubnet1DefaultRouteB42E6062": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "DemoVpcPublicSubnet1RouteTable793CEE44"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "DemoVpcIGWA39C3A20"
+    }
+   },
+   "DependsOn": [
+    "DemoVpcVPCGW49915943"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "DemoVpcPublicSubnet2Subnet2A5F92B4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    },
+    "AvailabilityZone": "ap-south-1b",
+    "CidrBlock": "10.0.128.0/17",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "EcsStack/DemoVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/PublicSubnet2/Subnet"
+   }
+  },
+  "DemoVpcPublicSubnet2RouteTable3AEDFD36": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EcsStack/DemoVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "DemoVpcPublicSubnet2RouteTableAssociationE4DEB33C": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "DemoVpcPublicSubnet2RouteTable3AEDFD36"
+    },
+    "SubnetId": {
+     "Ref": "DemoVpcPublicSubnet2Subnet2A5F92B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "DemoVpcPublicSubnet2DefaultRoute793B6769": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "DemoVpcPublicSubnet2RouteTable3AEDFD36"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "DemoVpcIGWA39C3A20"
+    }
+   },
+   "DependsOn": [
+    "DemoVpcVPCGW49915943"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "DemoVpcIGWA39C3A20": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "EcsStack/DemoVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/IGW"
+   }
+  },
+  "DemoVpcVPCGW49915943": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    },
+    "InternetGatewayId": {
+     "Ref": "DemoVpcIGWA39C3A20"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoVpc/VPCGW"
+   }
+  },
+  "DemoCluster8CB095E3": {
+   "Type": "AWS::ECS::Cluster",
+   "Properties": {
+    "ClusterName": "DemoCluster",
+    "ServiceConnectDefaults": {
+     "Namespace": "app.server"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoCluster/Resource"
+   }
+  },
+  "DemoClusterDefaultServiceDiscoveryNamespace282C8E5D": {
+   "Type": "AWS::ServiceDiscovery::PrivateDnsNamespace",
+   "Properties": {
+    "Name": "app.server",
+    "Vpc": {
+     "Ref": "DemoVpc1AD7511C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/DemoCluster/DefaultServiceDiscoveryNamespace/Resource"
+   }
+  },
+  "gatewayserverLB81970F69": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "gatewayserverLBSecurityGroupE557053D",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "DemoVpcPublicSubnet1Subnet7B8BDBCD"
+     },
+     {
+      "Ref": "DemoVpcPublicSubnet2Subnet2A5F92B4"
+     }
+    ],
+    "Type": "application"
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822",
+    "DemoVpcPublicSubnet1DefaultRouteB42E6062",
+    "DemoVpcPublicSubnet1RouteTableAssociation1C4D66E6",
+    "DemoVpcPublicSubnet2DefaultRoute793B6769",
+    "DemoVpcPublicSubnet2RouteTableAssociationE4DEB33C"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/LB/Resource"
+   }
+  },
+  "gatewayserverLBSecurityGroupE557053D": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB EcsStackgatewayserverLB0932F03B",
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    }
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/LB/SecurityGroup/Resource"
+   }
+  },
+  "gatewayserverLBSecurityGrouptoEcsStackgatewayserverServiceSecurityGroupB0B8214280492EB880": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "GroupId": {
+     "Fn::GetAtt": [
+      "gatewayserverLBSecurityGroupE557053D",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "gatewayserverServiceSecurityGroup3344811E",
+      "GroupId"
+     ]
+    },
+    "FromPort": 80,
+    "ToPort": 80
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/LB/SecurityGroup/to EcsStackgatewayserverServiceSecurityGroupB0B82142:80"
+   }
+  },
+  "gatewayserverLBPublicListener410944B7": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "gatewayserverLBPublicListenerECSGroup461F1D70"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "gatewayserverLB81970F69"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/LB/PublicListener/Resource"
+   }
+  },
+  "gatewayserverLBPublicListenerECSGroup461F1D70": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckPath": "/?query=%7B__typename%7D",
+    "Matcher": {
+     "HttpCode": "200,400"
+    },
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    }
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/LB/PublicListener/ECSGroup/Resource"
+   }
+  },
+  "gatewayserverTaskDefTaskRole6030A856": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/TaskDef/TaskRole/Resource"
+   }
+  },
+  "gatewayserverTaskDefBAC53B94": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": {
+       "Fn::Sub": "250451895396.dkr.ecr.ap-south-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-250451895396-ap-south-1:e7dcd0c863a5a7222a8c64a9f6d332b36e6220bd192d68bc4955f791d9fa2a97"
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "gatewayserverTaskDefwebLogGroup7529AB24"
+        },
+        "awslogs-stream-prefix": "my-log-group",
+        "awslogs-region": "ap-south-1"
+       }
+      },
+      "Name": "web",
+      "PortMappings": [
+       {
+        "ContainerPort": 80,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "512",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "gatewayserverTaskDefExecutionRoleE505CFBE",
+      "Arn"
+     ]
+    },
+    "Family": "EcsStackgatewayserverTaskDef6AE6BF0A",
+    "Memory": "2048",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "gatewayserverTaskDefTaskRole6030A856",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/TaskDef/Resource"
+   }
+  },
+  "gatewayserverTaskDefwebLogGroup7529AB24": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "RetentionInDays": 7
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/TaskDef/web/LogGroup/Resource"
+   }
+  },
+  "gatewayserverTaskDefExecutionRoleE505CFBE": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/TaskDef/ExecutionRole/Resource"
+   }
+  },
+  "gatewayserverTaskDefExecutionRoleDefaultPolicyF86B84C1": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:ecr:ap-south-1:250451895396:repository/cdk-hnb659fds-container-assets-250451895396-ap-south-1"
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "gatewayserverTaskDefwebLogGroup7529AB24",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "gatewayserverTaskDefExecutionRoleDefaultPolicyF86B84C1",
+    "Roles": [
+     {
+      "Ref": "gatewayserverTaskDefExecutionRoleE505CFBE"
+     }
+    ]
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/TaskDef/ExecutionRole/DefaultPolicy/Resource"
+   }
+  },
+  "gatewayserverService911D69DF": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "DemoCluster8CB095E3"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 100
+    },
+    "DesiredCount": 2,
+    "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 20,
+    "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "web",
+      "ContainerPort": 80,
+      "TargetGroupArn": {
+       "Ref": "gatewayserverLBPublicListenerECSGroup461F1D70"
+      }
+     }
+    ],
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "gatewayserverServiceSecurityGroup3344811E",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "DemoVpcPublicSubnet1Subnet7B8BDBCD"
+       },
+       {
+        "Ref": "DemoVpcPublicSubnet2Subnet2A5F92B4"
+       }
+      ]
+     }
+    },
+    "ServiceConnectConfiguration": {
+     "Enabled": true,
+     "Namespace": "app.server"
+    },
+    "ServiceName": "GatewayServer",
+    "TaskDefinition": {
+     "Ref": "gatewayserverTaskDefBAC53B94"
+    }
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822",
+    "gatewayserverLBPublicListenerECSGroup461F1D70",
+    "gatewayserverLBPublicListener410944B7"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/Service/Service"
+   }
+  },
+  "gatewayserverServiceSecurityGroup3344811E": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EcsStack/gateway-server/Service/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    }
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/Service/SecurityGroup/Resource"
+   }
+  },
+  "gatewayserverServiceSecurityGroupfromEcsStackgatewayserverLBSecurityGroupA67E500580C9F15551": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 80,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "gatewayserverServiceSecurityGroup3344811E",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "gatewayserverLBSecurityGroupE557053D",
+      "GroupId"
+     ]
+    },
+    "ToPort": 80
+   },
+   "DependsOn": [
+    "AuthorServiceSecurityGroupBFC7F434",
+    "AuthorServiceAA276ED1",
+    "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+    "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+    "AuthorServiceAuthorServiceDefinitionBB059C64",
+    "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+    "BookServiceSecurityGroup4DE61332",
+    "BookServiceEEA00288",
+    "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+    "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+    "BookServiceBookServiceDefinition3B566BD7",
+    "BookServiceBookServiceDefinitionTaskRoleFF620822"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/gateway-server/Service/SecurityGroup/from EcsStackgatewayserverLBSecurityGroupA67E5005:80"
+   }
+  },
+  "BookServiceBookServiceDefinitionTaskRoleFF620822": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/BookService/BookServiceDefinition/TaskRole/Resource"
+   }
+  },
+  "BookServiceBookServiceDefinition3B566BD7": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": {
+       "Fn::Sub": "250451895396.dkr.ecr.ap-south-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-250451895396-ap-south-1:c8e7b681e7e082b08e75eb489576652f4333ec7156ddaf05ca7b10d9e5f13cdd"
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55"
+        },
+        "awslogs-stream-prefix": "BookService",
+        "awslogs-region": "ap-south-1"
+       }
+      },
+      "Name": "BookService",
+      "PortMappings": [
+       {
+        "ContainerPort": 8080,
+        "Name": "books",
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "512",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "BookServiceBookServiceDefinitionExecutionRole0B65C324",
+      "Arn"
+     ]
+    },
+    "Family": "EcsStackBookServiceBookServiceDefinition7F96E596",
+    "Memory": "2048",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "BookServiceBookServiceDefinitionTaskRoleFF620822",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/BookService/BookServiceDefinition/Resource"
+   }
+  },
+  "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55": {
+   "Type": "AWS::Logs::LogGroup",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/BookService/BookServiceDefinition/BookServiceContainer/LogGroup/Resource"
+   }
+  },
+  "BookServiceBookServiceDefinitionExecutionRole0B65C324": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/BookService/BookServiceDefinition/ExecutionRole/Resource"
+   }
+  },
+  "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:ecr:ap-south-1:250451895396:repository/cdk-hnb659fds-container-assets-250451895396-ap-south-1"
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733",
+    "Roles": [
+     {
+      "Ref": "BookServiceBookServiceDefinitionExecutionRole0B65C324"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/BookService/BookServiceDefinition/ExecutionRole/DefaultPolicy/Resource"
+   }
+  },
+  "BookServiceEEA00288": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "DemoCluster8CB095E3"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "EnableECSManagedTags": false,
+    "LaunchType": "FARGATE",
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "BookServiceSecurityGroup4DE61332",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "DemoVpcPublicSubnet1Subnet7B8BDBCD"
+       },
+       {
+        "Ref": "DemoVpcPublicSubnet2Subnet2A5F92B4"
+       }
+      ]
+     }
+    },
+    "ServiceConnectConfiguration": {
+     "Enabled": true,
+     "Namespace": "app.server",
+     "Services": [
+      {
+       "ClientAliases": [
+        {
+         "DnsName": "books",
+         "Port": 8080
+        }
+       ],
+       "DiscoveryName": "books",
+       "PortName": "books"
+      }
+     ]
+    },
+    "ServiceName": "BookService",
+    "TaskDefinition": {
+     "Ref": "BookServiceBookServiceDefinition3B566BD7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/BookService/BookService/Service"
+   }
+  },
+  "BookServiceSecurityGroup4DE61332": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EcsStack/BookService/BookService/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "from 0.0.0.0/0:ALL PORTS",
+      "FromPort": 0,
+      "IpProtocol": "tcp",
+      "ToPort": 65535
+     }
+    ],
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/BookService/BookService/SecurityGroup/Resource"
+   }
+  },
+  "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/AuthorService/AuthorServiceDefinition/TaskRole/Resource"
+   }
+  },
+  "AuthorServiceAuthorServiceDefinitionBB059C64": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": {
+       "Fn::Sub": "250451895396.dkr.ecr.ap-south-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-250451895396-ap-south-1:d86da78c4075906adf8c3b2b652d52d42f17307397811683010c973e83a1827d"
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C"
+        },
+        "awslogs-stream-prefix": "AuthorService",
+        "awslogs-region": "ap-south-1"
+       }
+      },
+      "Name": "AuthorService",
+      "PortMappings": [
+       {
+        "ContainerPort": 8000,
+        "Name": "authors",
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "512",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61",
+      "Arn"
+     ]
+    },
+    "Family": "EcsStackAuthorServiceAuthorServiceDefinitionEF18D519",
+    "Memory": "2048",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/AuthorService/AuthorServiceDefinition/Resource"
+   }
+  },
+  "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C": {
+   "Type": "AWS::Logs::LogGroup",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/AuthorService/AuthorServiceDefinition/AuthorServiceContainer/LogGroup/Resource"
+   }
+  },
+  "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/AuthorService/AuthorServiceDefinition/ExecutionRole/Resource"
+   }
+  },
+  "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:ecr:ap-south-1:250451895396:repository/cdk-hnb659fds-container-assets-250451895396-ap-south-1"
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F",
+    "Roles": [
+     {
+      "Ref": "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/AuthorService/AuthorServiceDefinition/ExecutionRole/DefaultPolicy/Resource"
+   }
+  },
+  "AuthorServiceAA276ED1": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "DemoCluster8CB095E3"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "EnableECSManagedTags": false,
+    "LaunchType": "FARGATE",
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "AuthorServiceSecurityGroupBFC7F434",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "DemoVpcPublicSubnet1Subnet7B8BDBCD"
+       },
+       {
+        "Ref": "DemoVpcPublicSubnet2Subnet2A5F92B4"
+       }
+      ]
+     }
+    },
+    "ServiceConnectConfiguration": {
+     "Enabled": true,
+     "Namespace": "app.server",
+     "Services": [
+      {
+       "ClientAliases": [
+        {
+         "DnsName": "authors",
+         "Port": 8000
+        }
+       ],
+       "DiscoveryName": "authors",
+       "PortName": "authors"
+      }
+     ]
+    },
+    "ServiceName": "AuthorService",
+    "TaskDefinition": {
+     "Ref": "AuthorServiceAuthorServiceDefinitionBB059C64"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/AuthorService/AuthorService/Service"
+   }
+  },
+  "AuthorServiceSecurityGroupBFC7F434": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EcsStack/AuthorService/AuthorService/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "from 0.0.0.0/0:ALL PORTS",
+      "FromPort": 0,
+      "IpProtocol": "tcp",
+      "ToPort": 65535
+     }
+    ],
+    "VpcId": {
+     "Ref": "DemoVpc1AD7511C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/AuthorService/AuthorService/SecurityGroup/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31SXW/bMAz8LX1XtC4PQ1/TZCsCFGvgBH0NaIX12NiSIUoOAsP/fbRsN+kHChjQ8XQU6SPn+tdcz2/gxDNzOM5KynW7DWCOSqh9i2au2+faqOWLfd4s1SbmJZltzC2GnrugzMWAO8hLvPAXbsHsDEEgZ9/EPVjbgF6UDxDwBOexzBgtgjTyr0Ib1BZN9BTOD97FOhX4lvhdeGT+RK9t4juFhnW7LCNL9V41wT/gC+hb5uMKX8jS1PBHxtkAZNFfcWPuFn1DZjBhgJ3iARyIjWvQn3W78dSIeGX5L1TINQwZX9Cp2X0NoTeK9aKuZQDJyEcHh3sowcrLH4pjCRzIlKLIk4Js0cgkv85OFryLr3UkzthRM+Gr+51UlvlNY7gKO0VQ6TZzw0qkc+MkL415QP3f+T0wY2C9cuaIfl1B0e+LrJXc6QxrxxScP98DoypdIaN7dMVbxQl3ncqQXfSDlU8x1DGo9JAsdCEOpC5GSaesO6B+5R/Nzzst3+3NKxPNfLSBKtTZcP4H/SOdrh8DAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "EcsStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "gatewayserverLoadBalancerDNSB48C6116": {
+   "Value": {
+    "Fn::GetAtt": [
+     "gatewayserverLB81970F69",
+     "DNSName"
+    ]
+   }
+  },
+  "gatewayserverServiceURL5B4F0700": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "http://",
+      {
+       "Fn::GetAtt": [
+        "gatewayserverLB81970F69",
+        "DNSName"
+       ]
+      }
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

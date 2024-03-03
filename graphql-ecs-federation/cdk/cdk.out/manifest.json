@@ -1,0 +1,316 @@
+{
+  "version": "29.0.0",
+  "artifacts": {
+    "EcsStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "EcsStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "EcsStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://250451895396/ap-south-1",
+      "properties": {
+        "templateFile": "EcsStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::250451895396:role/cdk-hnb659fds-deploy-role-250451895396-ap-south-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::250451895396:role/cdk-hnb659fds-cfn-exec-role-250451895396-ap-south-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-250451895396-ap-south-1/769d322929aceafb3d99679ff930da06ec892d5774260f8d655e20e2f48e6c75.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "EcsStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::250451895396:role/cdk-hnb659fds-lookup-role-250451895396-ap-south-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "EcsStack.assets"
+      ],
+      "metadata": {
+        "/EcsStack/DemoVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpc1AD7511C"
+          }
+        ],
+        "/EcsStack/DemoVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcPublicSubnet1Subnet7B8BDBCD"
+          }
+        ],
+        "/EcsStack/DemoVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcPublicSubnet1RouteTable793CEE44"
+          }
+        ],
+        "/EcsStack/DemoVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcPublicSubnet1RouteTableAssociation1C4D66E6"
+          }
+        ],
+        "/EcsStack/DemoVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcPublicSubnet1DefaultRouteB42E6062"
+          }
+        ],
+        "/EcsStack/DemoVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcPublicSubnet2Subnet2A5F92B4"
+          }
+        ],
+        "/EcsStack/DemoVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcPublicSubnet2RouteTable3AEDFD36"
+          }
+        ],
+        "/EcsStack/DemoVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcPublicSubnet2RouteTableAssociationE4DEB33C"
+          }
+        ],
+        "/EcsStack/DemoVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcPublicSubnet2DefaultRoute793B6769"
+          }
+        ],
+        "/EcsStack/DemoVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcIGWA39C3A20"
+          }
+        ],
+        "/EcsStack/DemoVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoVpcVPCGW49915943"
+          }
+        ],
+        "/EcsStack/DemoCluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoCluster8CB095E3"
+          }
+        ],
+        "/EcsStack/DemoCluster/DefaultServiceDiscoveryNamespace/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DemoClusterDefaultServiceDiscoveryNamespace282C8E5D"
+          }
+        ],
+        "/EcsStack/gateway-server/LB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverLB81970F69"
+          }
+        ],
+        "/EcsStack/gateway-server/LB/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverLBSecurityGroupE557053D"
+          }
+        ],
+        "/EcsStack/gateway-server/LB/SecurityGroup/to EcsStackgatewayserverServiceSecurityGroupB0B82142:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverLBSecurityGrouptoEcsStackgatewayserverServiceSecurityGroupB0B8214280492EB880"
+          }
+        ],
+        "/EcsStack/gateway-server/LB/PublicListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverLBPublicListener410944B7"
+          }
+        ],
+        "/EcsStack/gateway-server/LB/PublicListener/ECSGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverLBPublicListenerECSGroup461F1D70"
+          }
+        ],
+        "/EcsStack/gateway-server/LoadBalancerDNS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverLoadBalancerDNSB48C6116"
+          }
+        ],
+        "/EcsStack/gateway-server/ServiceURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverServiceURL5B4F0700"
+          }
+        ],
+        "/EcsStack/gateway-server/TaskDef/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverTaskDefTaskRole6030A856"
+          }
+        ],
+        "/EcsStack/gateway-server/TaskDef/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverTaskDefBAC53B94"
+          }
+        ],
+        "/EcsStack/gateway-server/TaskDef/web/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverTaskDefwebLogGroup7529AB24"
+          }
+        ],
+        "/EcsStack/gateway-server/TaskDef/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverTaskDefExecutionRoleE505CFBE"
+          }
+        ],
+        "/EcsStack/gateway-server/TaskDef/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverTaskDefExecutionRoleDefaultPolicyF86B84C1"
+          }
+        ],
+        "/EcsStack/gateway-server/Service/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverService911D69DF"
+          }
+        ],
+        "/EcsStack/gateway-server/Service/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverServiceSecurityGroup3344811E"
+          }
+        ],
+        "/EcsStack/gateway-server/Service/SecurityGroup/from EcsStackgatewayserverLBSecurityGroupA67E5005:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "gatewayserverServiceSecurityGroupfromEcsStackgatewayserverLBSecurityGroupA67E500580C9F15551"
+          }
+        ],
+        "/EcsStack/BookService/BookServiceDefinition/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BookServiceBookServiceDefinitionTaskRoleFF620822"
+          }
+        ],
+        "/EcsStack/BookService/BookServiceDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BookServiceBookServiceDefinition3B566BD7"
+          }
+        ],
+        "/EcsStack/BookService/BookServiceDefinition/BookServiceContainer/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BookServiceBookServiceDefinitionBookServiceContainerLogGroup63990E55"
+          }
+        ],
+        "/EcsStack/BookService/BookServiceDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BookServiceBookServiceDefinitionExecutionRole0B65C324"
+          }
+        ],
+        "/EcsStack/BookService/BookServiceDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BookServiceBookServiceDefinitionExecutionRoleDefaultPolicyDF084733"
+          }
+        ],
+        "/EcsStack/BookService/BookService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BookServiceEEA00288"
+          }
+        ],
+        "/EcsStack/BookService/BookService/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BookServiceSecurityGroup4DE61332"
+          }
+        ],
+        "/EcsStack/AuthorService/AuthorServiceDefinition/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorServiceAuthorServiceDefinitionTaskRole63257A2D"
+          }
+        ],
+        "/EcsStack/AuthorService/AuthorServiceDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorServiceAuthorServiceDefinitionBB059C64"
+          }
+        ],
+        "/EcsStack/AuthorService/AuthorServiceDefinition/AuthorServiceContainer/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorServiceAuthorServiceDefinitionAuthorServiceContainerLogGroup61A30C2C"
+          }
+        ],
+        "/EcsStack/AuthorService/AuthorServiceDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorServiceAuthorServiceDefinitionExecutionRole55C24D61"
+          }
+        ],
+        "/EcsStack/AuthorService/AuthorServiceDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorServiceAuthorServiceDefinitionExecutionRoleDefaultPolicyA3F7509F"
+          }
+        ],
+        "/EcsStack/AuthorService/AuthorService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorServiceAA276ED1"
+          }
+        ],
+        "/EcsStack/AuthorService/AuthorService/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorServiceSecurityGroupBFC7F434"
+          }
+        ],
+        "/EcsStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/EcsStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/EcsStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "EcsStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "graphql-federatedgateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc",
+    "copy-schema": "cpy schema.graphql dist/",
+    "start": "npm run compile && npm run copy-schema && node ./dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@apollo/gateway": "^2.5.5",
+    "@apollo/server": "^4.9.4",
+    "@apollo/subgraph": "^2.5.5",
+    "apollo-gateway": "^0.0.1",
+    "apollo-server": "^3.12.1",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "cpy-cli": "^5.0.0",
+    "typescript": "^5.2.2"
+  }
+}

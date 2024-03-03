@@ -1,0 +1,60 @@
+{
+  "version": "29.0.0",
+  "files": {
+    "769d322929aceafb3d99679ff930da06ec892d5774260f8d655e20e2f48e6c75": {
+      "source": {
+        "path": "EcsStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "250451895396-ap-south-1": {
+          "bucketName": "cdk-hnb659fds-assets-250451895396-ap-south-1",
+          "objectKey": "769d322929aceafb3d99679ff930da06ec892d5774260f8d655e20e2f48e6c75.json",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::250451895396:role/cdk-hnb659fds-file-publishing-role-250451895396-ap-south-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "e7dcd0c863a5a7222a8c64a9f6d332b36e6220bd192d68bc4955f791d9fa2a97": {
+      "source": {
+        "directory": "asset.e7dcd0c863a5a7222a8c64a9f6d332b36e6220bd192d68bc4955f791d9fa2a97"
+      },
+      "destinations": {
+        "250451895396-ap-south-1": {
+          "repositoryName": "cdk-hnb659fds-container-assets-250451895396-ap-south-1",
+          "imageTag": "e7dcd0c863a5a7222a8c64a9f6d332b36e6220bd192d68bc4955f791d9fa2a97",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::250451895396:role/cdk-hnb659fds-image-publishing-role-250451895396-ap-south-1"
+        }
+      }
+    },
+    "c8e7b681e7e082b08e75eb489576652f4333ec7156ddaf05ca7b10d9e5f13cdd": {
+      "source": {
+        "directory": "asset.c8e7b681e7e082b08e75eb489576652f4333ec7156ddaf05ca7b10d9e5f13cdd"
+      },
+      "destinations": {
+        "250451895396-ap-south-1": {
+          "repositoryName": "cdk-hnb659fds-container-assets-250451895396-ap-south-1",
+          "imageTag": "c8e7b681e7e082b08e75eb489576652f4333ec7156ddaf05ca7b10d9e5f13cdd",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::250451895396:role/cdk-hnb659fds-image-publishing-role-250451895396-ap-south-1"
+        }
+      }
+    },
+    "d86da78c4075906adf8c3b2b652d52d42f17307397811683010c973e83a1827d": {
+      "source": {
+        "directory": "asset.d86da78c4075906adf8c3b2b652d52d42f17307397811683010c973e83a1827d"
+      },
+      "destinations": {
+        "250451895396-ap-south-1": {
+          "repositoryName": "cdk-hnb659fds-container-assets-250451895396-ap-south-1",
+          "imageTag": "d86da78c4075906adf8c3b2b652d52d42f17307397811683010c973e83a1827d",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::250451895396:role/cdk-hnb659fds-image-publishing-role-250451895396-ap-south-1"
+        }
+      }
+    }
+  }
+}
